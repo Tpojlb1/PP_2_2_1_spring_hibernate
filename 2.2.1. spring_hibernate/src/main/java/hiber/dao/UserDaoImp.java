@@ -1,6 +1,7 @@
 package hiber.dao;
 
 import hiber.model.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public List<User> listUsers() {
 public User getUserByCar(String model, int series) {
     Query userQuery = sessionFactory
             .getCurrentSession()
-            .createQuery("from User where car.model = :model and car.series = :series")
+            .createQuery("from User where car.model = :model and car.series = :series", User.class)
             .setParameter("model", model)
             .setParameter("series", series);
 
